@@ -14,4 +14,67 @@ class FileHandler:
         # Returns: True if file is supported
         return file_path.suffix.lower() in ALL_SUPPORTED_EXTENSIONS
     
+    @staticmethod
+    def get_file_type(file_path: Path) -> str:
+        """Get the type of the file
+        Args:
+            file_path: Path to the file
+            
+        Returns:
+            File type string
+        """
+        from utils.constants import (
+            IMAGE_EXTENSIONS,
+            VIDEO_EXTENSIONS,
+            AUDIO_EXTENSIONS,
+            DOCUMENT_EXTENSIONS
+        )
+
+        ext = file_path.suffix().lower()
+
+        if ext in IMAGE_EXTENSIONS:
+            return "image"
+        elif ext in VIDEO_EXTENSIONS:
+            return "video"
+        elif ext in AUDIO_EXTENSIONS:
+            return "audio"
+        elif ext in DOCUMENT_EXTENSIONS:
+            return "document"
+        else:
+            return "unknown"
+        
+    @staticmethod
+    def scan_directory(directory: Path, recursive: bool = False) -> List[Path]:
+        """Scan directory for supported files
+        Args:
+            directory: Directory to scan
+            recursive: Whether to use recursion
+        Returns:
+            List of supported file paths
+        """
+        files = []
+
+        try:
+            if recursive:
+                for item in directory.rglob('*'):
+                    if item.is_file() and FileHandler.is_supported(item):
+                        files.append(item)
+            else:
+                for item in directory.iterdir():
+                    if item.is_file() and FileHandler.is_supported(item):
+                        files.append(item)
+        except PermissionError:
+            pass  # Skipping directories without access to
+
+        return sorted(files)
     
+    @staticmethod
+    def get_files_by_type(files: List[Path], file_type: str) -> List[Path]:
+        """Filter files by their type
+        Args:
+            files: List of file paths
+            file_type: Type of files to filter
+        Returns:
+            Filtered list of file paths
+        """
+        return [f for f in files if FileHandler.get_file_type(f) == file_type]
