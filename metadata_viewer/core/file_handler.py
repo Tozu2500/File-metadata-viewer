@@ -16,13 +16,6 @@ class FileHandler:
     
     @staticmethod
     def get_file_type(file_path: Path) -> str:
-        """Get the type of the file
-        Args:
-            file_path: Path to the file
-            
-        Returns:
-            File type string
-        """
         from utils.constants import (
             IMAGE_EXTENSIONS,
             VIDEO_EXTENSIONS,
@@ -45,13 +38,6 @@ class FileHandler:
         
     @staticmethod
     def scan_directory(directory: Path, recursive: bool = False) -> List[Path]:
-        """Scan directory for supported files
-        Args:
-            directory: Directory to scan
-            recursive: Whether to use recursion
-        Returns:
-            List of supported file paths
-        """
         files = []
 
         try:
@@ -70,11 +56,6 @@ class FileHandler:
     
     @staticmethod
     def get_files_by_type(files: List[Path], file_type: str) -> List[Path]:
-        """Filter files by their type
-        Args:
-            files: List of file paths
-            file_type: Type of files to filter
-        Returns:
-            Filtered list of file paths
-        """
+        
         return [f for f in files if FileHandler.get_file_type(f) == file_type]
+
