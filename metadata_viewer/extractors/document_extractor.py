@@ -19,7 +19,7 @@ class DocumentExtractor(BaseExtractor):
 
         metadata = {}
 
-        extension = self.file_path.suffix().lower()
+        extension = self.file_path.suffix.lower()
 
         if extension == '.pdf':
             metadata.update(self._extract_pdf())
