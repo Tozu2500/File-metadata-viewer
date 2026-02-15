@@ -1,0 +1,1 @@
+# Application styling with dark/light theme support
