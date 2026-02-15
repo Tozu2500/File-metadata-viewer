@@ -7,7 +7,7 @@ from .base_extractor import BaseExtractor
 try:
     from PyPDF2 import PdfReader
     PYPDF2_AVAILABLE = True
-except:
+except ImportError:
     PYPDF2_AVAILABLE = False
 
 
