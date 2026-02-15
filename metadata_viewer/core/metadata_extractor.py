@@ -50,4 +50,13 @@ class MetadataExtractor:
         
     def _get_basic_metadata(self, file_path: Path) -> Dict[str, Any]:
         # Get basic metadata for the unsupported file group
-        
+        stat = file_path.stat()
+        return {
+            "File Name": file_path.name,
+            "File Path": str(file_path.absolute()),
+            "File Type": "Unknown",
+            "File Size": stat.st_size,
+            "Created": stat.st_ctime,
+            "Modified": stat.st_mtime,
+            "Accessed": stat.st_atime,
+        }
