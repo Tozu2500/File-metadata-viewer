@@ -161,4 +161,158 @@ def get_stylesheet(theme: Theme = None) -> str:
             font-weight: bold;
             font-size: 13px;
         }}
+
+        QPushButton {{
+            background-color: {c['accent']};
+            color: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }}
+
+        QPushButton:hover {{
+            background-color: {c['accent_hover']};
+        }}
+
+        QPushButton:pressed {{
+            background-color: {c['accent_pressed']};
+        }}
+
+        QPushButton:disabled {{
+            background-color: {c['disabled_bg']};
+            color: {c['disabled_fg']};
+        }}
+
+        QLineEdit {{
+            background-color: {c['surface']};
+            color: {c['text']};
+            border: 1px solid {c['border']};
+            border-radius: 4px;
+            padding: 8px;
+            font-size: 13px;
+        }}
+
+        QLineEdit:focus {{
+            border: 2px solid {c['accent']};
+        }}
+
+        QLabel {{
+            color: {c['text']};
+            font-size: 13px;
+            background-color: transparent;
+        }}
+
+        QGroupBox {{
+            background-color: {c['surface']};
+            color: {c['text']};
+            border: 1px solid {c['border']};
+            border-radius: 4px;
+            margin-top: 10px;
+            padding-top: 10px;
+            font-weight: bold;
+        }}
+
+        QGroupBox::title {{
+            color: {c['accent']};
+            subcontrol-origin: margin;
+            subcontrol-position: top left;
+            padding: 5px 10px;
+        }}
+
+        QScrollArea {{
+            background-color: {c['surface']};
+            border: none;
+        }}
+
+        QScrollBar:vertical {{
+            background-color: {c['scrollbar_bg']};
+            width: 12px;
+            border-radius: 6px;
+        }}
+
+        QScrollBar::handle:vertical {{
+            background-color: {c['scrollbar_handle']};
+            border-radius: 6px;
+            min-height: 20px;
+        }}
+
+        QScrollBar::handle:vertical:hover {{
+            background-color: {c['scrollbar_hover']};
+        }}
+
+        QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{
+            height: 0px;
+        }}
+
+        QScrollBar:horizontal {{
+            background-color: {c['scrollbar_bg']};
+            height: 12px;
+            border-radius: 6px;
+        }}
+
+        QScrollBar::handle:horizontal {{
+            background-color: {c['scrollbar_handle']};
+            border-radius: 6px;
+            min-width: 20px;
+        }}
+
+        QScrollBar::handle:horizontal:hover {{
+            background-color: {c['scrollbar_hover']};
+        }}
+
+        QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {{
+            width: 0px;
+        }}
+
+        QStatusBar {{
+            background-color: {c['header_bg']};
+            color: {c['header_fg']};
+            font-size: 12px;
+        }}
+
+        QStatusBar QLabel {{
+            color: {c['header_fg']};
+        }}
+
+        QMenuBar {{
+            background-color: {c['header_bg']};
+            color: {c['header_fg']};
+            padding: 5px;
+        }}
+
+        QMenuBar::item {{
+            background-color: transparent;
+            color: {c['header_fg']};
+            padding: 5px 10px;
+        }}
+
+        QMenuBar::item:selected {{
+            background-color: {c['secondary']};
+        }}
+
+        QMenu {{
+            background-color: {c['menu_bg']};
+            color: {c['menu_fg']};
+            border: 1px solid {c['border']};
+        }}
+
+        QMenu::item {{
+            padding: 8px 25px;
+            color: {c['menu_fg']};
+        }}
+
+        QMenu::item:selected {{
+            background-color: {c['accent']};
+            color: #FFFFFF;
+        }}
+
+        QSplitter::handle {{
+            background-color: {c['splitter']};
+        }}
+
+        QSplitter::handle:hover {{
+            background-color: {c['accent']};
+        }}
     """
