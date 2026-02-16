@@ -316,3 +316,53 @@ def get_stylesheet(theme: Theme = None) -> str:
             background-color: {c['accent']};
         }}
     """
+
+def get_title_style(theme: Theme = None) -> str:
+    # Get the style sheet for the section title labels
+    c = get_colors(theme)
+    return f"""font-size: 16px;
+               font-weight: bold;
+               color: {c['accent']};
+               background-color: transparent;
+            """
+
+def get_muted_text_style(theme: Theme = None) -> str:
+    # Get the style for muted/secondary text
+    c = get_colors(theme)
+    return f"""color: {c['text_muted']};
+               font-size: 11px;
+               background-color: transparent;
+            """
+
+def get_file_label_style(theme: Theme = None) -> str:
+    # Get style for file info labels
+    c = get_colors(theme)
+    return f"""color: {c['text_secondary']};
+               font-size: 12px;
+               background-color: transparent;
+            """
+
+def get_preview_style(theme: Theme = None) -> str:
+    # Get style for the preview placeholder
+    c = get_colors(theme)
+    return f"""
+        QLabel {{
+            background-color: {c['preview_bg']};
+            color: {c['preview_fg']};
+            padding: 20px;
+            border-radius: 4px;
+        }}
+    """
+
+def get_preview_video_style(theme: Theme = None) -> str:
+    # Get the style for the video preview placeholder
+    c = get_colors(theme)
+    return f"""
+        QLabel {{
+            background-color: {c['preview_bg']};
+            color: {c['preview_fg']};
+            padding: 40px;
+            border-radius: 4px;
+            font-size: 16px;
+        }}
+    """
