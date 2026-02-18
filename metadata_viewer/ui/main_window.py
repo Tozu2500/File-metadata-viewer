@@ -145,3 +145,52 @@ class MainWindow(QMainWindow):
         about_action = QAction("About", self)
         about_action.triggered.connect(self.show_about)
         help_menu.addAction(about_action)
+
+    def on_file_selected(self, file_path: Path):
+        # Handle file selection
+
+        try:
+            self.status_bar.showMessage(f"Loading metadata for {file_path.name}...")
+
+            # Extract metadata
+            metadata = self.metadata_extractor.extract(file_path)
+
+            if metadata:
+                # Display metadata
+                self.metadata_display.display_metadata(file_path, metadata)
+
+                # Preview
+                self.preview_widget.preview_file(file_path)
+
+                self.status_bar.showMessage(f"Loaded: {file_path.name}")
+            else:
+                self.status_bar.showMessage("Failed to extract metadata")
+                QMessageBox.warning(
+                    self,
+                    "Error",
+                    f"Failed to extract metadata from {file_path.name}"
+                )
+        except Exception as e:
+            self.status_bar.showMessage(f"Error, {str(e)}")
+            QMessageBox.critical(
+                self,
+                "Error",
+                f"An error occurred: {e(str)}"
+            )
+
+    def open_file(self):
+        # Open file dialog
+        file_path, _ = QFileDialog.getOpenFileName(
+            self,
+            "Open File",
+            str(Path.home()),
+            "All Files (*)"
+        )
+
+        if file_path:
+            path = Path(file_path)
+            self.file_browser.set_path(path.parent)
+            self.on_file_selected(path)
+
+    def open_folder(self):
+        # Open folder dialog
