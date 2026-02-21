@@ -175,7 +175,7 @@ class MainWindow(QMainWindow):
             QMessageBox.critical(
                 self,
                 "Error",
-                f"An error occurred: {e(str)}"
+                f"An error occurred: {str(e)}"
             )
 
     def open_file(self):
@@ -242,3 +242,4 @@ class MainWindow(QMainWindow):
             <p><i>Built with PyQt6 and Python</i></p>
             """
         )
+
