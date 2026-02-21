@@ -23,7 +23,7 @@ class FileHandler:
             DOCUMENT_EXTENSIONS
         )
 
-        ext = file_path.suffix().lower()
+        ext = file_path.suffix.lower()
 
         if ext in IMAGE_EXTENSIONS:
             return "image"
@@ -58,4 +58,5 @@ class FileHandler:
     def get_files_by_type(files: List[Path], file_type: str) -> List[Path]:
         
         return [f for f in files if FileHandler.get_file_type(f) == file_type]
+
 
