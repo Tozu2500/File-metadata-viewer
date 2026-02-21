@@ -12,10 +12,18 @@ def main():
     app.setApplicationName("Python Metadata Viewer")
     app.setOrganizationName("Tozu / Tomi Louhiniitty")
 
+    # Set app icon
+    icon_path = Path(__file__).parent / "assets" / "app_icon.png"
+    if icon_path.exists():
+        app_icon = QIcon(str(icon_path))
+        app.setWindowIcon(app_icon)
+
     window = MainWindow()
+    window.setWindowIcon(app_icon) if icon_path.exists() else None
     window.show()
 
     sys.exit(app.exec())
 
 if __name__ == "__main__":
     main()
+
