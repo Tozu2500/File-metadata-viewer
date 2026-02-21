@@ -194,3 +194,51 @@ class MainWindow(QMainWindow):
 
     def open_folder(self):
         # Open folder dialog
+        folder_path = QFileDialog.getExistingDirectory(
+            self,
+            "Open Folder",
+            str(Path.home())
+        )
+
+        if folder_path:
+            self.file_browser.set_path(Path(folder_path))
+
+    def apply_theme(self, theme: Theme):
+        # Apply a theme to the app
+        set_current_theme(theme)
+        self.setStyleSheet(get_stylesheet(theme))
+        self.file_browser.apply_theme()
+        self.metadata_display.apply_theme()
+        self.preview_widget.apply_theme()
+        self.status_bar.showMessage(f"Theme changed to {theme.value.title()}")
+
+    def refresh_view(self):
+        # Refresh the view
+        self.status_bar.showMessage("Refreshed")
+
+    def show_about(self):
+        # Show about dialog
+        QMessageBox.about(
+            self,
+            "About Metadata Viewer",
+            f"""
+            <h2>Basic Metadata Viewer</h2>
+            <p>Version 1.0</p>
+            <p>A basic tool for viewing and extracting metadata from various file types.</p>
+            <h3>Supported formats:</h3>
+            <ul>
+                <li><b>Images:</b> JPG, PNG, GIF, BMP, TIFF, WebP</li>
+                <li><b>Videos:</b> MP4, AVI, MKV, MOV, WMV, FLV</li>
+                <li><b>Audio: </b> MP3, WAV, FLAC, AAC, OGG</li>
+                <li><b>Documents: </b> PDF, TXT</li>
+            </ul>
+            <h3>Features:</h3>
+            <ul>
+                <li>Extract detailed metadata including EXIF, GPS, codec info</li>
+                <li>Preview images with thumbnails</li>
+                <li>Export metadata to TXT, JSON or CSV</li>
+                <li>Browse files with integrated file manager</li>
+            </ul>
+            <p><i>Built with PyQt6 and Python</i></p>
+            """
+        )
