@@ -66,15 +66,18 @@ class ImageExtractor(BaseExtractor):
         try:
             exif = img.getexif()
             if exif:
+                gps_found = False
+
                 for tag_id, value in exif.items():
                     tag = TAGS.get(tag_id, tag_id)
 
                     # Handle GPS data
                     if tag == "GPSInfo":
+                        gps_found = True
                         gps_data = self._extract_gps(value)
                         exif_data.update(gps_data)
                     else:
-                        # Convert bytes to string
+                        # Bytes to string conversion
                         if isinstance(value, bytes):
                             try:
                                 value = value.decode('utf-8', errors='ignore')
@@ -82,6 +85,14 @@ class ImageExtractor(BaseExtractor):
                                 value = str(value)
 
                         exif_data[f"EXIF {tag}"] = value
+
+                # EXIF exists, but no GPS tags found
+                if not gps_found:
+                    exif_data["GPS Info"] = "No GPS data found"
+            else:
+                # No EXIF data at all
+                exif_data["EXIF Info"] = "No EXIF data found"
+
         except Exception as e:
             exif_data["EXIF Error"] = str(e)
 
@@ -120,3 +131,4 @@ class ImageExtractor(BaseExtractor):
         # Convert GPS coordinates to degrees
         d, m, s = value
         return float(d) + float(m) / 60.0 + float(s) / 3600.0
+
